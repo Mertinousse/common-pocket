@@ -1,0 +1,4 @@
+ruby 2.7.0
+postgres 13.0
+nodejs 14.12.0
+yarn 1.22.5
