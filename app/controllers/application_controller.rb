@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate
+  before_action :authenticate, :set_action_cable_identifier
   helper_method :current_user
 
   def current_user
@@ -12,5 +12,9 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |username, password|
       @current_user = User.find_by(name: username)
     end
+  end
+
+  def set_action_cable_identifier
+    cookies.encrypted[:user_id] = current_user.id
   end
 end

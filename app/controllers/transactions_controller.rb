@@ -1,14 +1,9 @@
 class TransactionsController < ApplicationController
-  def new
+  def index
+    @transactions = Transaction.all
   end
 
   def create
-  end
-
-  def index
-  end
-
-  def edit
   end
 
   def update

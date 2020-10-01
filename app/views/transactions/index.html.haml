@@ -1,1 +1,15 @@
 = current_user.inspect
+
+%br
+
+- if @new_transaction
+  Új form
+- else
+  %button{ data: { reflex: 'click->Example#new' } }
+    +
+
+-# @transactions.each do |transaction|
+  %div
+    %span{ style: 'display: inline-block; width: 50px' }= transaction.amount
+    %span{ style: 'display: inline-block; width: 100px' }= transaction.user.name
+    = link_to transaction.created_at, '#'
