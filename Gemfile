@@ -13,6 +13,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'stimulus_reflex'
 gem 'redis', '~> 4.0'
+gem 'groupdate'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

@@ -1,15 +1,22 @@
 = current_user.inspect
+%hr
+= session[:transaction_params]
+%hr
+= session[:step]
+%hr
 
-%br
+#transactions
+  - @transactions.this_month.ordered.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
+    %h4= day
+    - transactions.each do |transaction|
+      .transaction
+        .transaction-category= transaction.category.name
+        .transaction-amount= transaction.amount
+        .transaction-creator= transaction.user.name
 
-- if @new_transaction
-  Új form
-- else
+#actions
   %button{ data: { reflex: 'click->Example#new' } }
     +
 
--# @transactions.each do |transaction|
-  %div
-    %span{ style: 'display: inline-block; width: 50px' }= transaction.amount
-    %span{ style: 'display: inline-block; width: 100px' }= transaction.user.name
-    = link_to transaction.created_at, '#'
+- if session[:step].present?
+  = render 'form'

@@ -1,0 +1,18 @@
+#new-transaction
+  #new-transaction-background{ data: { reflex: 'click->Example#cancel' } }
+  = form_with scope: :transaction do |f|
+    - case session[:step]
+    - when 1
+      = f.number_field :amount, data: { reflex: 'blur->Example#new' }
+    - when 2
+      .new-transaction-type
+        = f.radio_button :category_id, Category.income.id, data: { reflex: 'change->Example#new' }
+        = f.label :category_id, 'Bevétel', value: Category.income.id
+      .new-transaction-type
+        = f.radio_button :category_id, '', checked: false, data: { reflex: 'change->Example#new' }
+        = f.label :category_id, 'Kiadás', value: ''
+    - when 3
+      - Category.all.each do |category|
+        .new-transaction-category
+          = f.radio_button :category_id, category.id, data: { reflex: 'change->Example#new' }
+          = f.label :category_id, category.name, value: category.id

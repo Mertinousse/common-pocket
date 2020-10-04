@@ -23,6 +23,33 @@ class ExampleReflex < ApplicationReflex
   # Learn more at: https://docs.stimulusreflex.com
 
   def new
-    @new_transaction = Transaction.new(user: current_user)
+    session[:step] ||= 0
+    session[:transaction_params] ||= {}
+
+    if (1..3).cover? session[:step]
+      session[:transaction_params].merge!(transaction_params)
+    end
+
+    session[:step] = session[:step] + 1
+
+    if session[:transaction_params]['category_id'].present?
+      Transaction.create(session[:transaction_params].merge(user: current_user))
+      hide_form
+    end
+  end
+
+  def cancel
+    hide_form
+  end
+
+  private
+
+  def transaction_params
+    params.require(:transaction).permit(:amount, :category_id)
+  end
+
+  def hide_form
+    session.delete(:step)
+    session.delete(:transaction_params)
   end
 end

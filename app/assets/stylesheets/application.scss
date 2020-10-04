@@ -1,0 +1,77 @@
+#transactions {
+  .transaction {
+    display: flex;
+
+    .transaction-category {
+      flex: 30%;
+    }
+
+    .transaction-amount {
+      flex: 50%;
+    }
+
+    .transaction-creator {
+      flex: 20%;
+    }
+  }
+}
+
+#actions {
+  bottom: 10px;
+  position: fixed;
+  right: 10px;
+}
+
+#new-transaction {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  #new-transaction-background {
+    background-color: rgba(1, 1, 1, .5);
+    height: 100%;
+    position: fixed;
+    width: 100%;
+  }
+
+  form {
+    display: flex;
+    width: 100%;
+    z-index: 1;
+
+    [type="number"] {
+      font-size: 1.5em;
+      margin: 10px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .new-transaction-type {
+      align-items: center;
+      background-color: #efefef;
+      border-radius: 6px;
+      display: flex;
+      flex: auto;
+      margin: 0 10px;
+
+      input {
+        display: none;
+      }
+
+      label {
+        flex: auto;
+        line-height: 100px;
+        margin: 0;
+        text-align: center;
+      }
+    }
+
+    .new-transaction-category {
+
+    }
+  }
+}
