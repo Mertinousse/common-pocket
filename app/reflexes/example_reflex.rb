@@ -26,7 +26,7 @@ class ExampleReflex < ApplicationReflex
     session[:step] ||= 0
     session[:transaction_params] ||= {}
 
-    if (1..3).cover? session[:step]
+    if (1..2).cover? session[:step]
       session[:transaction_params].merge!(transaction_params)
     end
 

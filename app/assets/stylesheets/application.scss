@@ -39,39 +39,51 @@
   }
 
   form {
+    align-content: center;
+    align-items: center;
+    background-color: #fff;
     display: flex;
+    flex-wrap: wrap;
+    height: 100%;
     width: 100%;
     z-index: 1;
 
     [type="number"] {
       font-size: 1.5em;
+      height: 1.5em;
       margin: 10px;
       text-align: center;
       width: 100%;
     }
 
+    [type="radio"] {
+      display: none;
+    }
+
+    label {
+      margin: 0;
+    }
+
     .new-transaction-type {
-      align-items: center;
       background-color: #efefef;
       border-radius: 6px;
       display: flex;
       flex: auto;
       margin: 0 10px;
 
-      input {
-        display: none;
-      }
-
       label {
         flex: auto;
-        line-height: 100px;
-        margin: 0;
+        line-height: 3em;
         text-align: center;
       }
     }
 
     .new-transaction-category {
-
+      background-color: #efefef;
+      border-radius: 6px;
+      flex: 100%;
+      margin: 5px;
+      text-align: center;
     }
   }
 }
