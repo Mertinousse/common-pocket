@@ -1,13 +1,22 @@
+@import "sakura/sakura-ink";
+
 #transactions {
   .transaction {
+    background-color: $color-fade;
     display: flex;
+    margin-bottom: 7px;
+    padding: 7px;
+
+    > div {
+      color: $color-bg;
+    }
 
     .transaction-category {
-      flex: 30%;
+      flex: 40%;
     }
 
     .transaction-amount {
-      flex: 50%;
+      flex: 40%;
     }
 
     .transaction-creator {
@@ -17,9 +26,9 @@
 }
 
 #actions {
-  bottom: 10px;
+  bottom: 13px;
   position: fixed;
-  right: 10px;
+  right: 13px;
 }
 
 #new-transaction {
@@ -31,17 +40,10 @@
   top: 0;
   width: 100%;
 
-  #new-transaction-background {
-    background-color: rgba(1, 1, 1, .5);
-    height: 100%;
-    position: fixed;
-    width: 100%;
-  }
-
   form {
     align-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: $color-bg;
     display: flex;
     flex-wrap: wrap;
     height: 100%;
@@ -50,8 +52,7 @@
 
     [type="number"] {
       font-size: 1.5em;
-      height: 1.5em;
-      margin: 10px;
+      margin: 13px;
       text-align: center;
       width: 100%;
     }
@@ -60,30 +61,23 @@
       display: none;
     }
 
-    label {
-      margin: 0;
-    }
-
-    .new-transaction-type {
-      background-color: #efefef;
-      border-radius: 6px;
-      display: flex;
-      flex: auto;
-      margin: 0 10px;
+    button {
+      width: 100%;
 
       label {
-        flex: auto;
-        line-height: 3em;
-        text-align: center;
+        font-weight: normal;
+        margin: 0;
       }
     }
 
+    .new-transaction-type {
+      flex: auto;
+      margin: 0 13px;
+    }
+
     .new-transaction-category {
-      background-color: #efefef;
-      border-radius: 6px;
       flex: 100%;
-      margin: 5px;
-      text-align: center;
+      margin: 5px 13px;
     }
   }
 }

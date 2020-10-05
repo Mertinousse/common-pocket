@@ -34,12 +34,12 @@ class ExampleReflex < ApplicationReflex
 
     if session[:transaction_params]['category_id'].present?
       Transaction.create(session[:transaction_params].merge(user: current_user))
-      hide_form
+      close_form
     end
   end
 
   def cancel
-    hide_form
+    close_form
   end
 
   private
@@ -48,7 +48,7 @@ class ExampleReflex < ApplicationReflex
     params.require(:transaction).permit(:amount, :category_id)
   end
 
-  def hide_form
+  def close_form
     session.delete(:step)
     session.delete(:transaction_params)
   end
