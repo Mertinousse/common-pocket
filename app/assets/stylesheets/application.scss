@@ -1,9 +1,21 @@
-@import "sakura/sakura-ink";
+@import "sakura/sakura-vader";
+
+button {
+  border-radius: 4px;
+}
 
 #transactions {
+  .transactions-header {
+    h5 {
+      text-align: center;
+    }
+  }
+
   .transaction {
-    background-color: $color-fade;
+    background-color: $color-blossom;
+    border-radius: 21px;
     display: flex;
+    justify-content: space-between;
     margin-bottom: 7px;
     padding: 7px;
 
@@ -12,15 +24,28 @@
     }
 
     .transaction-category {
-      flex: 40%;
+      align-items: center;
+      display: flex;
+      flex: 1;
+      padding: 0 7px 0 4px;
+
+      [role="img"] {
+        color: $color-bg;
+        font-size: 16px;
+      }
     }
 
     .transaction-amount {
-      flex: 40%;
+      flex: 1;
+      font-weight: bold;
     }
 
     .transaction-creator {
-      flex: 20%;
+      background-color: $color-bg;
+      border-radius: 100%;
+      color: $color-fade;
+      text-align: center;
+      width: 21px;
     }
   }
 }
@@ -50,11 +75,23 @@
     width: 100%;
     z-index: 1;
 
-    [type="number"] {
-      font-size: 1.5em;
+    .new-transaction-amount {
       margin: 13px;
-      text-align: center;
+      position: relative;
       width: 100%;
+
+      [type="number"] {
+        font-size: 1.5em;
+        text-align: center;
+        width: 100%;
+      }
+
+      span {
+        font-size: 1.5em;
+        position: absolute;
+        right: 13px;
+        top: 2px;
+      }
     }
 
     [type="radio"] {

@@ -1,11 +1,16 @@
 #transactions
   - @transactions.this_month.ordered.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
-    %h4= day
+    .transactions-header
+      %h5= day
     - transactions.each do |transaction|
       .transaction
-        .transaction-category= transaction.category.name
-        .transaction-amount= transaction.amount
-        .transaction-creator= transaction.user.name
+        .transaction-category
+          %ion-icon{ name: "#{transaction.category.key}-outline" }
+          = transaction.category.name
+        .transaction-amount
+          = "#{transaction.amount} Ft"
+        .transaction-creator
+          = transaction.user.name.first
 
 #actions
   %button{ data: { reflex: 'click->Example#new' } }

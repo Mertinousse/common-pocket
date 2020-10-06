@@ -2,7 +2,9 @@
   = form_with scope: :transaction do |f|
     - case session[:step]
     - when 1
-      = f.number_field :amount
+      .new-transaction-amount
+        = f.number_field :amount, autofocus: true
+        %span Ft
       .new-transaction-type
         = f.radio_button :category_id, Category.income.id, data: { reflex: 'change->Example#new' }
         %button{ type: :button }
