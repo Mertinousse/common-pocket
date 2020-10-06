@@ -7,6 +7,8 @@ class Transaction < ApplicationRecord
   scope :ordered, -> { order(created_at: :desc) }
   scope :this_month, -> { where(created_at: Time.current.beginning_of_month..Time.current.end_of_month) }
 
+  validates :amount, presence: true
+
   before_create :set_sign
 
   private

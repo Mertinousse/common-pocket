@@ -13,8 +13,8 @@
           = transaction.user.name.first
 
 #actions
-  %button{ data: { reflex: 'click->Example#new' } }
+  %button{ data: { reflex: 'click->Wizard#start' } }
     +
 
-- if session[:step].present?
-  = render 'form'
+- if session[:wizard_step].present?
+  = render 'wizard'

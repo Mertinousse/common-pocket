@@ -1,0 +1,23 @@
+#wizard
+  #wizard-previous{ data: { reflex: 'click->Wizard#previous' } }
+    %ion-icon{ name: 'arrow-undo-circle-outline' }
+  = form_with scope: :transaction do |f|
+    - case session[:wizard_step]
+    - when 1
+      .wizard-amount
+        = f.number_field :amount, value: session[:wizard_params]['amount'], autofocus: true
+        %span Ft
+      .wizard-type
+        = f.radio_button :category_id, Category.income.id, data: { reflex: 'change->Wizard#next' }
+        %button{ type: :button }
+          = f.label :category_id, 'Bevétel', value: Category.income.id
+      .wizard-type
+        = f.radio_button :category_id, '', checked: false, data: { reflex: 'change->Wizard#next' }
+        %button{ type: :button }
+          = f.label :category_id, 'Kiadás', value: ''
+    - when 2
+      - Category.expenses.each do |category|
+        .wizard-category
+          = f.radio_button :category_id, category.id,  data: { reflex: 'change->Wizard#next' }
+          %button{ type: :button }
+            = f.label :category_id, category.name, value: category.id

@@ -1,4 +1,4 @@
-class ExampleReflex < ApplicationReflex
+class WizardReflex < ApplicationReflex
   delegate :current_user, to: :connection
 
   # Add Reflex methods in this file.
@@ -22,24 +22,28 @@ class ExampleReflex < ApplicationReflex
   #
   # Learn more at: https://docs.stimulusreflex.com
 
-  def new
-    session[:step] ||= 0
-    session[:transaction_params] ||= {}
+  def start
+    session[:wizard_step] = 1
+    session[:wizard_params] = {}
+  end
 
-    if (1..2).cover? session[:step]
-      session[:transaction_params].merge!(transaction_params)
-    end
+  def next
+    session[:wizard_params].merge!(transaction_params)
+    session[:wizard_step] = session[:wizard_step] + 1
 
-    session[:step] = session[:step] + 1
+    transaction = Transaction.new(session[:wizard_params].merge(user: current_user))
 
-    if session[:transaction_params]['category_id'].present?
-      Transaction.create(session[:transaction_params].merge(user: current_user))
-      close_form
+    if transaction.valid?
+      transaction.save && reset
     end
   end
 
-  def cancel
-    close_form
+  def previous
+    if session[:wizard_step] > 1
+      session[:wizard_step] = session[:wizard_step] - 1
+    else
+      reset
+    end
   end
 
   private
@@ -48,8 +52,8 @@ class ExampleReflex < ApplicationReflex
     params.require(:transaction).permit(:amount, :category_id)
   end
 
-  def close_form
-    session.delete(:step)
-    session.delete(:transaction_params)
+  def reset
+    session.delete(:wizard_step)
+    session.delete(:wizard_params)
   end
 end

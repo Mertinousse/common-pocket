@@ -32,6 +32,7 @@ button {
       [role="img"] {
         color: $color-bg;
         font-size: 16px;
+        padding: 0 6px 0 2px;
       }
     }
 
@@ -45,7 +46,7 @@ button {
       border-radius: 100%;
       color: $color-fade;
       text-align: center;
-      width: 21px;
+      width: 1.55em;;
     }
   }
 }
@@ -56,26 +57,36 @@ button {
   right: 13px;
 }
 
-#new-transaction {
+#wizard {
   align-items: center;
+  background-color: $color-bg;
   display: flex;
+  flex-direction: column;
   height: 100%;
   left: 0;
   position: fixed;
   top: 0;
   width: 100%;
 
+  #wizard-previous {
+    width: 100%;
+
+    [role="img"] {
+      font-size: 2em;
+      padding: 13px 13px 0;
+    }
+  }
+
   form {
     align-content: center;
     align-items: center;
-    background-color: $color-bg;
     display: flex;
     flex-wrap: wrap;
     height: 100%;
     width: 100%;
     z-index: 1;
 
-    .new-transaction-amount {
+    .wizard-amount {
       margin: 13px;
       position: relative;
       width: 100%;
@@ -107,12 +118,12 @@ button {
       }
     }
 
-    .new-transaction-type {
+    .wizard-type {
       flex: auto;
       margin: 0 13px;
     }
 
-    .new-transaction-category {
+    .wizard-category {
       flex: 100%;
       margin: 5px 13px;
     }
