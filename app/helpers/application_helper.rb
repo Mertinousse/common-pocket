@@ -2,7 +2,7 @@ module ApplicationHelper
   def permanent
     {
       'data-reflex-permanent': true,
-      id: SecureRandom.uuid
+      id: "permanent-#{SecureRandom.uuid}"
     }
   end
 end

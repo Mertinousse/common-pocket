@@ -19,7 +19,7 @@
         .transaction-category
           %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
           = transaction.category.name
-        .transaction-amount
+        .transaction-amount{ class: ('padded' if transaction.amount.positive?) }
           = "#{transaction.amount} Ft"
         .transaction-creator
           = transaction.user.name.first

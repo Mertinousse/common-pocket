@@ -1,4 +1,4 @@
-@import "sakura/sakura-vader";
+@import "sakura/sakura-dark";
 
 main {
   display: flex;
@@ -21,8 +21,8 @@ button {
     border-radius: 21px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 7px;
-    padding: 7px;
+    margin-bottom: .75em;
+    padding: .5em;
 
     > div {
       color: $color-bg;
@@ -32,18 +32,22 @@ button {
       align-items: center;
       display: flex;
       flex: 1;
-      padding: 0 7px 0 4px;
+      padding: 0 .5em 0 .25em;
 
       [role="img"] {
         color: $color-bg;
         font-size: 16px;
-        padding: 0 6px 0 2px;
+        padding: 0 .5em 0 .15em;
       }
     }
 
     .transaction-amount {
       flex: 1;
       font-weight: bold;
+
+      &.padded {
+        padding-left: .65em;
+      }
     }
 
     .transaction-creator {
@@ -82,7 +86,7 @@ button {
     border-radius: 100%;
     box-shadow: inset 0px 0px $color-bg;
     color: $color-fade;
-    font-size: 3em;
+    font-size: 45px;
   }
 }
 
@@ -101,7 +105,7 @@ button {
     width: 100%;
 
     [role="img"] {
-      font-size: 2em;
+      font-size: 30px;
       padding: 13px 13px 0;
     }
   }
@@ -122,7 +126,7 @@ button {
       margin: 0 13px;
 
       select {
-        margin: 0 10px 10px;
+        margin: 0 .75em .75em;
       }
     }
 
@@ -141,7 +145,7 @@ button {
         font-size: 1.5em;
         position: absolute;
         right: 13px;
-        top: 2px;
+        top: 3px;
       }
     }
 
@@ -165,7 +169,7 @@ button {
 
     .wizard-category {
       flex: 100%;
-      margin: 5px 13px;
+      margin: .4em 13px;
 
       label {
         display: flex;
@@ -175,7 +179,7 @@ button {
       [role="img"] {
         color: $color-bg;
         font-size: 16px;
-        padding: 0 6px;
+        padding: 0 .5em;
       }
     }
   }
