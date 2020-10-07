@@ -47,19 +47,7 @@ export default class extends ApplicationController {
    *   reflexId - a UUID4 or developer-provided unique identifier for each Reflex
    */
 
-  // Assuming you create a "Example#dance" action in your Reflex class
-  // you'll be able to use the following lifecycle methods:
-
-  // beforeDance(element, reflex, noop, reflexId) {
-  //  element.innerText = 'Putting dance shoes on...'
-  // }
-
-  // danceSuccess(element, reflex, noop, reflexId) {
-  //   element.innerText = 'Danced like no one was watching! Was someone watching?'
-  // }
-
-  // danceError(element, reflex, error, reflexId) {
-  //   console.error('danceError', error);
-  //   element.innerText = "Couldn't dance!"
-  // }
+  afterStart(element, reflex, noop, reflexId) {
+    document.getElementById('transaction_amount').focus()
+  }
 }

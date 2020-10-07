@@ -25,7 +25,7 @@
           = transaction.user.name.first
 
 #actions-bottom
-  %button{ data: { reflex: 'click->Wizard#start' } }
+  %button{ data: { reflex: 'click->Wizard#start', controller: 'wizard' } }
     +
 
 - if session[:wizard_step].present?
