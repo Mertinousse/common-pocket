@@ -73,12 +73,18 @@ button {
   width: 100%;
 
   h5 {
+    height: 36px;
+    line-height: 33px;
     margin: 0;
+  }
+
+  a:hover {
+    border-bottom: 0;
   }
 
   [role="img"] {
     color: $color-text;
-    font-size: 2em;
+    font-size: 30px;
   }
 }
 
@@ -179,7 +185,8 @@ button {
 
       label {
         display: flex;
-        justify-content: center;
+        margin: auto;
+        width: 50%;
       }
 
       [role="img"] {
