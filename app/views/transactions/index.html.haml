@@ -9,6 +9,19 @@
   - else
     %ion-icon
 
+#statistics
+  - income = @transactions.income.sum(:amount)
+  - expenses = -@transactions.expenses.sum(:amount)
+  %table
+    %tr
+      %th Bevétel
+      %th Kiadás
+      %th Egyenleg
+    %tr
+      %th= number_with_delimiter(income, delimiter: ' ') + ' Ft'
+      %th= number_with_delimiter(expenses, delimiter: ' ') + ' Ft'
+      %th= number_with_delimiter(income - expenses, delimiter: ' ') + ' Ft'
+
 #transactions
   - @transactions.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
     .transactions-header
@@ -20,7 +33,7 @@
           %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
           = transaction.category.name
         .transaction-amount{ class: ('padded' if transaction.amount.positive?) }
-          = "#{transaction.amount} Ft"
+          = number_with_delimiter(transaction.amount, delimiter: ' ') + ' Ft'
         .transaction-creator
           = transaction.user.name.first
 
