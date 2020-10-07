@@ -25,8 +25,7 @@
           = transaction.user.name.first
 
 #actions-bottom
-  %button{ data: { reflex: 'click->Wizard#start', controller: 'wizard' } }
-    +
+  %ion-icon{ name: 'add-circle', data: { reflex: 'click->Wizard#start', controller: 'wizard' }, **permanent }
 
 - if session[:wizard_step].present?
   = render 'wizard'

@@ -76,6 +76,14 @@ button {
   bottom: 13px;
   position: fixed;
   right: 13px;
+
+  [role="img"] {
+    background-color: $color-bg;
+    border-radius: 100%;
+    box-shadow: inset 0px 0px $color-bg;
+    color: $color-fade;
+    font-size: 3em;
+  }
 }
 
 #wizard {
