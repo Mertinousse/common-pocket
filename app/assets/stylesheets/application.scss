@@ -1,5 +1,10 @@
 @import "sakura/sakura-vader";
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
 button {
   border-radius: 4px;
 }
@@ -51,7 +56,23 @@ button {
   }
 }
 
-#actions {
+#actions-top {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  h5 {
+    margin: 0;
+  }
+
+  [role="img"] {
+    color: $color-text;
+    font-size: 2em;
+  }
+}
+
+#actions-bottom {
   bottom: 13px;
   position: fixed;
   right: 13px;

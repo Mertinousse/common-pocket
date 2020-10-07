@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   def index
-    @transactions = Transaction.all
+    @offset = params[:offset].to_i || 0
+    @transactions = Transaction.months_before(@offset).ordered
   end
 
   def create

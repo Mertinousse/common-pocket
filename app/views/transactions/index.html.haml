@@ -1,7 +1,19 @@
+#actions-top
+  = link_to transactions_path(offset: @offset + 1) do
+    %ion-icon{ name: 'arrow-back-circle-outline' }
+  %h5
+    = (Time.current - @offset.months).strftime('%Y %B')
+  - if @offset > 0
+    = link_to transactions_path(offset: @offset - 1) do
+      %ion-icon{ name: 'arrow-forward-circle-outline' }
+  - else
+    %ion-icon
+
 #transactions
-  - @transactions.this_month.ordered.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
+  - @transactions.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
     .transactions-header
-      %h5= day
+      %h5
+        = day.strftime('%e')
     - transactions.each do |transaction|
       .transaction
         .transaction-category
@@ -12,7 +24,7 @@
         .transaction-creator
           = transaction.user.name.first
 
-#actions
+#actions-bottom
   %button{ data: { reflex: 'click->Wizard#start' } }
     +
 
