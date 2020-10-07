@@ -20,4 +20,6 @@
         .wizard-category
           = f.radio_button :category_id, category.id,  data: { reflex: 'change->Wizard#next' }
           %button{ type: :button }
-            = f.label :category_id, category.name, value: category.id
+            = f.label :category_id, value: category.id do
+              %ion-icon{ name: "#{category.key}-outline" }
+              = category.name

@@ -126,6 +126,17 @@ button {
     .wizard-category {
       flex: 100%;
       margin: 5px 13px;
+
+      label {
+        display: flex;
+        justify-content: center;
+      }
+
+      [role="img"] {
+        color: $color-bg;
+        font-size: 16px;
+        padding: 0 6px;
+      }
     }
   }
 }

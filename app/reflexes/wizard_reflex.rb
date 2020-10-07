@@ -29,13 +29,22 @@ class WizardReflex < ApplicationReflex
 
   def next
     session[:wizard_params].merge!(transaction_params)
-    session[:wizard_step] = session[:wizard_step] + 1
-
     transaction = Transaction.new(session[:wizard_params].merge(user: current_user))
 
-    if transaction.valid?
-      transaction.save && reset
+    case session[:wizard_step]
+    when 1
+      return if transaction.amount.blank?
+
+      if transaction.category.present?
+        transaction.save
+        reset && return
+      end
+    when 2
+      transaction.save
+      reset && return
     end
+
+    session[:wizard_step] = session[:wizard_step] + 1
   end
 
   def previous
