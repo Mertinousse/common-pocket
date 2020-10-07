@@ -5,7 +5,7 @@
     - case session[:wizard_step]
     - when 1
       .wizard-date
-        = f.date_select :created_at, selected: session[:wizard_params]['created_at']
+        = f.date_select :created_at, selected: session[:wizard_params]['created_at'] || Time.current
       .wizard-amount
         = f.number_field :amount, value: session[:wizard_params]['amount']
         %span Ft
