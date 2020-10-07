@@ -4,6 +4,8 @@
   = form_with scope: :transaction do |f|
     - case session[:wizard_step]
     - when 1
+      .wizard-date
+        = f.date_select :created_at
       .wizard-amount
         = f.number_field :amount, value: session[:wizard_params]['amount'], autofocus: true
         %span Ft

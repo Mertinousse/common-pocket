@@ -86,6 +86,13 @@ button {
     width: 100%;
     z-index: 1;
 
+    .wizard-date {
+      display: flex;
+      flex: 1;
+      justify-content: space-between;
+      margin: 0 13px;
+    }
+
     .wizard-amount {
       margin: 13px;
       position: relative;

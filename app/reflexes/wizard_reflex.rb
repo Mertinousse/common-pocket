@@ -58,7 +58,10 @@ class WizardReflex < ApplicationReflex
   private
 
   def transaction_params
-    params.require(:transaction).permit(:amount, :category_id)
+    params.require(:transaction).permit!.to_h.tap do |hash| 
+      date_string = %w(1 2 3).map { |n| hash.delete("created_at(#{n}i)") }.join('-')
+      hash[:created_at] = Date.parse(date_string)
+    end
   end
 
   def reset
