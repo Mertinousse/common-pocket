@@ -58,9 +58,11 @@ class WizardReflex < ApplicationReflex
   private
 
   def transaction_params
-    params.require(:transaction).permit!.to_h.tap do |hash| 
-      date_string = %w(1 2 3).map { |n| hash.delete("created_at(#{n}i)") }.join('-')
-      hash[:created_at] = Date.parse(date_string)
+    params.require(:transaction).permit!.to_h.tap do |hash|
+      if hash.keys.include?('created_at(1i)')
+        date_string = %w(1 2 3).map { |n| hash.delete("created_at(#{n}i)") }.join('-')
+        hash[:created_at] = Time.parse("#{date_string} #{Time.current.strftime('%H:%M:%S')}")
+      end
     end
   end
 

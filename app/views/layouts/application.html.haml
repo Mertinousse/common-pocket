@@ -8,7 +8,8 @@
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{:src => "https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js", :type => "module"}
+    %script{:nomodule => "", :src => "https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"}
   %body
     %main
       = yield
-    %script{:src => "https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"}

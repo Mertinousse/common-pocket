@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   def index
     @offset = params[:offset].to_i || 0
-    @transactions = Transaction.months_before(@offset).ordered
+    @transactions = Transaction.months_before(@offset)
   end
 
   def create

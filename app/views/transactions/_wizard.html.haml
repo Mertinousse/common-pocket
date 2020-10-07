@@ -1,11 +1,11 @@
 #wizard
   #wizard-previous{ data: { reflex: 'click->Wizard#previous' } }
-    %ion-icon{ name: 'arrow-undo-circle-outline' }
+    %ion-icon{ name: 'arrow-undo-circle-outline', **permanent }
   = form_with scope: :transaction do |f|
     - case session[:wizard_step]
     - when 1
       .wizard-date
-        = f.date_select :created_at
+        = f.date_select :created_at, selected: session[:wizard_params]['created_at']
       .wizard-amount
         = f.number_field :amount, value: session[:wizard_params]['amount'], autofocus: true
         %span Ft
@@ -23,5 +23,5 @@
           = f.radio_button :category_id, category.id,  data: { reflex: 'change->Wizard#next' }
           %button{ type: :button }
             = f.label :category_id, value: category.id do
-              %ion-icon{ name: "#{category.key}-outline" }
+              %ion-icon{ name: "#{category.key}-outline", **permanent }
               = category.name

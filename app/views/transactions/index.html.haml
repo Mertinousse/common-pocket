@@ -1,11 +1,11 @@
 #actions-top
   = link_to transactions_path(offset: @offset + 1) do
-    %ion-icon{ name: 'arrow-back-circle-outline' }
+    %ion-icon{ name: 'arrow-back-circle-outline', **permanent }
   %h5
     = (Time.current - @offset.months).strftime('%Y %B')
   - if @offset > 0
     = link_to transactions_path(offset: @offset - 1) do
-      %ion-icon{ name: 'arrow-forward-circle-outline' }
+      %ion-icon{ name: 'arrow-forward-circle-outline', **permanent }
   - else
     %ion-icon
 
@@ -14,10 +14,10 @@
     .transactions-header
       %h5
         = day.strftime('%e')
-    - transactions.each do |transaction|
+    - transactions.sort_by(&:created_at).reverse.each do |transaction|
       .transaction
         .transaction-category
-          %ion-icon{ name: "#{transaction.category.key}-outline" }
+          %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
           = transaction.category.name
         .transaction-amount
           = "#{transaction.amount} Ft"
