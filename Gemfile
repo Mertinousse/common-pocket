@@ -12,7 +12,9 @@ gem 'turbolinks', '~> 5'
 gem 'haml'
 gem 'haml-rails'
 gem 'stimulus_reflex'
-gem 'redis', '~> 4.0'
+gem "redis", ">= 4.0", require: %w[redis redis/connection/hiredis]
+gem "hiredis"
+gem 'redis-session-store'
 gem 'groupdate'
 
 gem 'bootsnap', '>= 1.4.2', require: false
