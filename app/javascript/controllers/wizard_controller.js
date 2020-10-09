@@ -21,6 +21,24 @@ export default class extends ApplicationController {
     // add your code here, if applicable
   }
 
+  scroll(event) {
+    const currentTarget = event.currentTarget
+
+    setTimeout(function() {
+      const x = currentTarget.scrollLeft,
+            width = currentTarget.offsetWidth,
+            fullWidth = currentTarget.firstElementChild.offsetWidth,
+            percent = (x / (fullWidth - width)) * 100
+
+      console.log(percent)
+
+      currentTarget.scrollLeft = 0
+      if (percent > 50) {
+        console.log('open form')
+      }
+    }, 1000)
+  }
+
   /* Reflex specific lifecycle methods.
    *
    * For every method defined in your Reflex class, a matching set of lifecycle methods become available

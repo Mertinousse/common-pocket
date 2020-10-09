@@ -22,20 +22,22 @@
       %th= number_with_delimiter(expenses, delimiter: ' ') + ' Ft'
       %th= number_with_delimiter(income - expenses, delimiter: ' ') + ' Ft'
 
-#transactions
+#transactions{ data: { controller: 'wizard' } }
   - @transactions.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
     .transactions-header
       %h6
         = day.strftime('%Y/%m/%d')
     - transactions.sort_by(&:created_at).reverse.each do |transaction|
-      .transaction
-        .transaction-category
-          %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
-          = transaction.category.name
-        .transaction-amount{ class: ('padded' if transaction.amount.positive?) }
-          = number_with_delimiter(transaction.amount, delimiter: ' ') + ' Ft'
-        .transaction-creator
-          = transaction.user.name.first
+      .transaction-scroll-wrapper{ data: { action: 'touchend->wizard#scroll' } }
+        .transaction-wrapper
+          .transaction
+            .transaction-category
+              %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
+              = transaction.category.name
+            .transaction-amount{ class: ('padded' if transaction.amount.positive?) }
+              = number_with_delimiter(transaction.amount, delimiter: ' ') + ' Ft'
+            .transaction-creator
+              = transaction.user.name.first
 
 #actions-bottom
   %ion-icon{ name: 'add-circle', data: { reflex: 'click->Wizard#start', controller: 'wizard' }, **permanent }
