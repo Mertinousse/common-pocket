@@ -55,6 +55,12 @@ class WizardReflex < ApplicationReflex
     end
   end
 
+  def destroy
+    transaction = Transaction.find(element['data-id'])
+
+    transaction.destroy if transaction.user == current_user
+  end
+
   private
 
   def transaction_params

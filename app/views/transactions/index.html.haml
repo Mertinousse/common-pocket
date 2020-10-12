@@ -28,9 +28,12 @@
       %h6
         = day.strftime('%Y/%m/%d')
     - transactions.sort_by(&:created_at).reverse.each do |transaction|
-      .transaction-scroll-wrapper{ data: { action: 'touchend->wizard#scroll' } }
-        .transaction-wrapper
-          .transaction
+      - locked = transaction.user != current_user
+      .transaction-scroll-wrapper{ id: "wrapper-#{transaction.id}",
+                                   class: ('locked' if locked),
+                                   data: { action: 'touchend->wizard#scroll', locked: locked } }
+        .transaction-wrapper{ data: { target: 'wizard.wrapper' } }
+          .transaction{ data: { target: 'wizard.transaction', id: transaction.id } }
             .transaction-category
               %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
               = transaction.category.name

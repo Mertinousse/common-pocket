@@ -24,19 +24,26 @@ export default class extends ApplicationController {
   scroll(event) {
     const currentTarget = event.currentTarget
 
-    setTimeout(function() {
-      const x = currentTarget.scrollLeft,
-            width = currentTarget.offsetWidth,
-            fullWidth = currentTarget.firstElementChild.offsetWidth,
-            percent = (x / (fullWidth - width)) * 100
+    if (currentTarget.hasAttribute('data-locked')) { return }
 
-      console.log(percent)
+    const wrapper = currentTarget.querySelector('.transaction-wrapper'),
+          transaction = currentTarget.querySelector('.transaction')
+    const x = currentTarget.scrollLeft,
+          width = currentTarget.offsetWidth,
+          fullWidth = currentTarget.firstElementChild.offsetWidth,
+          percent = (x / (fullWidth - width)) * 100
 
-      currentTarget.scrollLeft = 0
-      if (percent > 50) {
-        console.log('open form')
-      }
-    }, 1000)
+    if (percent == 100) {
+      this.stimulate('Wizard#destroy', transaction)
+    } else {
+      wrapper.style.width = '100%'
+      transaction.style.width = 'calc(100% - 14px)'
+
+      setTimeout(function() {
+        wrapper.style.width = '200%'
+        transaction.style.width = 'calc(50% - 14px)'
+      }, 500)
+    }
   }
 
   /* Reflex specific lifecycle methods.

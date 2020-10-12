@@ -22,10 +22,20 @@ button {
     &::-webkit-scrollbar {
       display: none;
     }
+
+    &.locked {
+      .transaction-wrapper {
+        width: 100%;
+      }
+
+      .transaction {
+        width: calc(100% - 14px);
+      }
+    }
   }
   
   .transaction-wrapper {
-    width: calc(200% - 28px);
+    width: 200%;
   }
 
   .transaction {
@@ -35,7 +45,7 @@ button {
     justify-content: space-between;
     margin-bottom: .75em;
     padding: .5em;
-    width: 50%;
+    width: calc(50% - 14px);
 
     > div {
       color: $color-bg;
