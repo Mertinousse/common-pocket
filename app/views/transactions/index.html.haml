@@ -31,7 +31,7 @@
       - locked = transaction.user != current_user
       .transaction-scroll-wrapper{ id: "wrapper-#{transaction.id}",
                                    class: ('locked' if locked),
-                                   data: { action: 'touchend->wizard#scroll', locked: locked } }
+                                   data: { action: 'touchend->wizard#destroy', locked: locked } }
         .transaction-wrapper{ data: { target: 'wizard.wrapper' } }
           .transaction{ data: { target: 'wizard.transaction', id: transaction.id } }
             .transaction-category

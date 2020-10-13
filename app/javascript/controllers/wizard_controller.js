@@ -21,29 +21,31 @@ export default class extends ApplicationController {
     // add your code here, if applicable
   }
 
-  scroll(event) {
+  destroy(event) {
     const currentTarget = event.currentTarget
 
     if (currentTarget.hasAttribute('data-locked')) { return }
 
-    const wrapper = currentTarget.querySelector('.transaction-wrapper'),
-          transaction = currentTarget.querySelector('.transaction')
-    const x = currentTarget.scrollLeft,
-          width = currentTarget.offsetWidth,
-          fullWidth = currentTarget.firstElementChild.offsetWidth,
-          percent = (x / (fullWidth - width)) * 100
+    setTimeout(() => {
+      const wrapper = currentTarget.querySelector('.transaction-wrapper'),
+            transaction = currentTarget.querySelector('.transaction')
+      const x = currentTarget.scrollLeft,
+            width = currentTarget.offsetWidth,
+            fullWidth = currentTarget.firstElementChild.offsetWidth,
+            percent = (x / (fullWidth - width)) * 100
 
-    if (percent == 100) {
-      this.stimulate('Wizard#destroy', transaction)
-    } else {
-      wrapper.style.width = '100%'
-      transaction.style.width = 'calc(100% - 14px)'
+      if (percent == 100) {
+        this.stimulate('Wizard#destroy', transaction)
+      } else {
+        wrapper.style.width = '100%'
+        transaction.style.width = 'calc(100% - 14px)'
 
-      setTimeout(function() {
-        wrapper.style.width = '200%'
-        transaction.style.width = 'calc(50% - 14px)'
-      }, 500)
-    }
+        setTimeout(() => {
+          wrapper.style.width = '200%'
+          transaction.style.width = 'calc(50% - 14px)'
+        }, 500)
+      }
+    }, 500)
   }
 
   /* Reflex specific lifecycle methods.
