@@ -41,6 +41,9 @@
               = number_with_delimiter(transaction.amount, delimiter: ' ') + ' Ft'
             .transaction-creator
               = transaction.user.name.first
+            - if transaction.recurring
+              .transaction-badge
+                %ion-icon{ name: 'repeat-outline', **permanent }
 
 #actions-bottom
   %ion-icon{ name: 'add-circle', data: { reflex: 'click->Wizard#start', controller: 'wizard' }, **permanent }

@@ -4,19 +4,23 @@
   = form_with scope: :transaction do |f|
     - case session[:wizard_step]
     - when 1
-      .wizard-date
-        = f.date_select :created_at, selected: (Time.parse(session[:wizard_params]['created_at']) rescue Time.current)
-      .wizard-amount
-        = f.number_field :amount, value: session[:wizard_params]['amount']
-        %span Ft
-      .wizard-type
-        = f.radio_button :category_id, Category.income.id, data: { reflex: 'change->Wizard#next' }
-        %button{ type: :button }
-          = f.label :category_id, 'Bevétel', value: Category.income.id
-      .wizard-type
-        = f.radio_button :category_id, '', checked: false, data: { reflex: 'change->Wizard#next' }
-        %button{ type: :button }
-          = f.label :category_id, 'Kiadás', value: ''
+      .wizard-main
+        .wizard-date
+          = f.date_select :created_at, selected: (Time.parse(session[:wizard_params]['created_at']) rescue Time.current)
+        .wizard-amount
+          = f.number_field :amount, value: session[:wizard_params]['amount']
+          %span Ft
+        .wizard-type
+          = f.radio_button :category_id, Category.income.id, data: { reflex: 'change->Wizard#next' }
+          %button{ type: :button }
+            = f.label :category_id, 'Bevétel', value: Category.income.id
+        .wizard-type
+          = f.radio_button :category_id, '', checked: false, data: { reflex: 'change->Wizard#next' }
+          %button{ type: :button }
+            = f.label :category_id, 'Kiadás', value: ''
+      .wizard-bottom
+        = f.check_box :recurring, checked: session[:wizard_params]['recurring'] == '1'
+        = f.label :recurring, 'Ismétlődő'
     - when 2
       - Category.expenses.each do |category|
         .wizard-category

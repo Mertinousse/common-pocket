@@ -45,6 +45,7 @@ button {
     justify-content: space-between;
     margin-bottom: .75em;
     padding: .5em;
+    position: relative;
     width: calc(50% - 14px);
 
     > div {
@@ -79,6 +80,23 @@ button {
       color: $color-fade;
       text-align: center;
       width: 1.55em;;
+    }
+
+    .transaction-badge {
+      background-color: $color-blossom;
+      border-radius: 100%;
+      border-top-left-radius: 0;
+      bottom: -.5em;
+      height: 1em;
+      left: .4em;
+      padding-bottom: .25em;
+      position: absolute;
+      text-align: center;
+
+      [role="img"] {
+        font-size: 16px;
+        padding: 0 .5em;
+      }
     }
   }
 }
@@ -146,13 +164,19 @@ button {
   }
 
   form {
-    align-content: center;
-    align-items: center;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     z-index: 1;
+
+    .wizard-main {
+      align-content: center;
+      align-items: center;
+      display: flex;
+      flex: 10;
+      flex-wrap: wrap;
+    }
 
     .wizard-date {
       display: flex;
@@ -200,6 +224,16 @@ button {
     .wizard-type {
       flex: auto;
       margin: 0 13px;
+    }
+
+    .wizard-bottom {
+      flex: 1;
+      margin: 0 13px;
+      text-align: right;
+
+      label {
+        display: inline-block;
+      }
     }
 
     .wizard-category {

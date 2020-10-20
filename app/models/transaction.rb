@@ -6,6 +6,7 @@ class Transaction < ApplicationRecord
   scope :expenses, -> { where('amount < 0') }
   scope :ordered, -> { order(created_at: :desc) }
   scope :months_before, ->(offset) { where(created_at: month_range(offset)) }
+  scope :recurring, -> { where(recurring: true) }
 
   validates :amount, presence: true
 
