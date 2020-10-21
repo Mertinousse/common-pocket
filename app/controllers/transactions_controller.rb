@@ -5,11 +5,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
-  end
-
-  def update
-  end
-
-  def destroy
+    Transaction.recur_for(current_user)
+    redirect_to transactions_path
   end
 end

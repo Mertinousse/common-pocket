@@ -12,8 +12,8 @@ gem 'turbolinks', '~> 5'
 gem 'haml'
 gem 'haml-rails'
 gem 'stimulus_reflex'
-gem "redis", ">= 4.0", require: %w[redis redis/connection/hiredis]
-gem "hiredis"
+gem 'redis', '>= 4.0', require: %w[redis redis/connection/hiredis]
+gem 'hiredis'
 gem 'redis-session-store'
 gem 'groupdate'
 

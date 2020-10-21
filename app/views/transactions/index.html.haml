@@ -1,52 +1,57 @@
-#actions-top
-  = link_to transactions_path(offset: @offset + 1) do
-    %ion-icon{ name: 'arrow-back-circle-outline', **permanent }
-  %h5
-    = l(Time.current - @offset.months, format: '%Y %B')
-  - if @offset > 0
-    = link_to transactions_path(offset: @offset - 1) do
-      %ion-icon{ name: 'arrow-forward-circle-outline', **permanent }
-  - else
-    %ion-icon
+- if current_user.recurrence_pending? && (@offset.nil? || @offset.zero?)
+  #notice
+    = link_to 'Ismétlődések létrehozása', transactions_path, method: :post
 
-#statistics
-  - income = @transactions.income.sum(:amount)
-  - expenses = -@transactions.expenses.sum(:amount)
-  %table
-    %tr
-      %th Bevétel
-      %th Kiadás
-      %th Egyenleg
-    %tr
-      %th= number_with_delimiter(income, delimiter: ' ') + ' Ft'
-      %th= number_with_delimiter(expenses, delimiter: ' ') + ' Ft'
-      %th= number_with_delimiter(income - expenses, delimiter: ' ') + ' Ft'
+%main
+  #actions-top
+    = link_to transactions_path(offset: @offset + 1) do
+      %ion-icon{ name: 'arrow-back-circle-outline', **permanent }
+    %h5
+      = l(Time.current - @offset.months, format: '%Y %B')
+    - if @offset > 0
+      = link_to transactions_path(offset: @offset - 1) do
+        %ion-icon{ name: 'arrow-forward-circle-outline', **permanent }
+    - else
+      %ion-icon
 
-#transactions{ data: { controller: 'wizard' } }
-  - @transactions.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
-    .transactions-header
-      %h6
-        = day.strftime('%Y/%m/%d')
-    - transactions.sort_by(&:created_at).reverse.each do |transaction|
-      - locked = transaction.user != current_user
-      .transaction-scroll-wrapper{ id: "wrapper-#{transaction.id}",
-                                   class: ('locked' if locked),
-                                   data: { action: 'touchend->wizard#destroy', locked: locked } }
-        .transaction-wrapper{ data: { target: 'wizard.wrapper' } }
-          .transaction{ data: { target: 'wizard.transaction', id: transaction.id } }
-            .transaction-category
-              %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
-              = transaction.category.name
-            .transaction-amount{ class: ('padded' if transaction.amount.positive?) }
-              = number_with_delimiter(transaction.amount, delimiter: ' ') + ' Ft'
-            .transaction-creator
-              = transaction.user.name.first
-            - if transaction.recurring
-              .transaction-badge
-                %ion-icon{ name: 'repeat-outline', **permanent }
+  #statistics
+    - income = @transactions.income.sum(:amount)
+    - expenses = -@transactions.expenses.sum(:amount)
+    %table
+      %tr
+        %th Bevétel
+        %th Kiadás
+        %th Egyenleg
+      %tr
+        %th= number_with_delimiter(income, delimiter: ' ') + ' Ft'
+        %th= number_with_delimiter(expenses, delimiter: ' ') + ' Ft'
+        %th= number_with_delimiter(income - expenses, delimiter: ' ') + ' Ft'
 
-#actions-bottom
-  %ion-icon{ name: 'add-circle', data: { reflex: 'click->Wizard#start', controller: 'wizard' }, **permanent }
+  #transactions{ data: { controller: 'wizard' } }
+    - @transactions.to_a.group_by_day(&:created_at).reverse_each do |day, transactions|
+      .transactions-header
+        %h6
+          = day.strftime('%Y/%m/%d')
+      - transactions.sort_by(&:created_at).reverse.each do |transaction|
+        - locked = transaction.user != current_user
+        .transaction-scroll-wrapper{ id: "wrapper-#{transaction.id}",
+                                     class: ('locked' if locked),
+                                     data: { action: 'touchend->wizard#destroy', locked: locked } }
+          .transaction-wrapper{ data: { target: 'wizard.wrapper' } }
+            .transaction{ data: { target: 'wizard.transaction', id: transaction.id } }
+              .transaction-category
+                %ion-icon{ name: "#{transaction.category.key}-outline", **permanent }
+                = transaction.category.name
+              .transaction-amount{ class: ('padded' if transaction.amount.positive?) }
+                = number_with_delimiter(transaction.amount, delimiter: ' ') + ' Ft'
+              .transaction-creator
+                = transaction.user.name.first
+              - if transaction.recurring || transaction.recurred?
+                .transaction-badge
+                  %ion-icon{ name: 'repeat-outline', **permanent }
 
-- if session[:wizard_step].present?
-  = render 'wizard'
+  #actions-bottom
+    %ion-icon{ name: 'add-circle', data: { reflex: 'click->Wizard#start', controller: 'wizard' }, **permanent }
+
+  - if session[:wizard_step].present?
+    = render 'wizard'
