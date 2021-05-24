@@ -29,20 +29,16 @@ export default class extends ApplicationController {
     setTimeout(() => {
       const wrapper = currentTarget.querySelector('.transaction-wrapper'),
             transaction = currentTarget.querySelector('.transaction')
-      const x = currentTarget.scrollLeft,
-            width = currentTarget.offsetWidth,
-            fullWidth = currentTarget.firstElementChild.offsetWidth,
-            percent = (x / (fullWidth - width)) * 100
 
-      if (percent == 100) {
+      if (currentTarget.scrollLeft > currentTarget.clientWidth * 0.99) {
         this.stimulate('Wizard#destroy', transaction)
       } else {
         wrapper.style.width = '100%'
-        transaction.style.width = 'calc(100% - 14px)'
+        transaction.style.width = 'calc(100% - 1em)'
 
         setTimeout(() => {
           wrapper.style.width = '200%'
-          transaction.style.width = 'calc(50% - 14px)'
+          transaction.style.width = 'calc(50% - 1em)'
         }, 500)
       }
     }, 500)
